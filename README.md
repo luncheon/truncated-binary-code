@@ -17,13 +17,7 @@ assert.deepEqual(encodeTruncatedBinary(7, 10), [1, 1, 0, 1]);
 assert.deepEqual(encodeTruncatedBinary(8, 10), [1, 1, 1, 0]);
 assert.deepEqual(encodeTruncatedBinary(9, 10), [1, 1, 1, 1]);
 
-for (let i = 0; i < 100; i++) {
-  const upperBound = Math.round(Math.random() * (Number.MAX_SAFE_INTEGER - 2)) + 2;
-  for (let j = 0; j < 100; j++) {
-    const x = Math.floor(Math.random() * upperBound);
-    assert.equal(decodeTruncatedBinary(encodeTruncatedBinary(x, upperBound), upperBound), x);
-  }
-}
+assert.equal(decodeTruncatedBinary([1, 0, 1], 10), 5);
 ```
 
 ## License
@@ -35,4 +29,5 @@ for (let i = 0; i < 100; i++) {
 - [@luncheon/**golomb-code**](https://www.npmjs.com/package/@luncheon/golomb-code): A [Golomb coding](https://en.wikipedia.org/wiki/Golomb_coding) implementation.
 - [@luncheon/**exponential-golomb-code**](https://www.npmjs.com/package/@luncheon/exponential-golomb-code): An [exponential-Golomb coding](https://en.wikipedia.org/wiki/Exponential-Golomb_coding) implementation.
 - [@luncheon/**fibonacci-code**](https://www.npmjs.com/package/@luncheon/fibonacci-code): A [Fibonacci coding](https://en.wikipedia.org/wiki/Fibonacci_coding) implementation.
+- [@luncheon/**parity-step-code**](https://www.npmjs.com/package/@luncheon/parity-step-code): A Universal Coding of Integers (UCI) inspired by [Collatz conjecture](https://en.wikipedia.org/wiki/Collatz_conjecture).
 - [@luncheon/**varint**](https://www.npmjs.com/package/@luncheon/varint): A `BigInt`-native [varint](https://en.wikipedia.org/wiki/Variable-length_quantity) codec supporting arbitrary chunk sizes and zigzag encoding.
