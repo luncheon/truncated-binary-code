@@ -31,8 +31,10 @@ it("encode", () => {
 });
 
 it("decode", () => {
-  for (let i = 0; i < 1000; i++) {
-    const upperBound = Math.round(Math.random() * (Number.MAX_SAFE_INTEGER - 2)) + 2;
+  assert.equal(decodeTruncatedBinary(encodeTruncatedBinary(0x3ffffffe, 0x3fffffff), 0x3fffffff), 0x3ffffffe);
+  assert.equal(decodeTruncatedBinary(encodeTruncatedBinary(0x3fffffff, 0x40000000), 0x40000000), 0x3fffffff);
+  for (let i = 0; i < 10000; i++) {
+    const upperBound = Math.round(Math.random() ** 8 * (Number.MAX_SAFE_INTEGER - 2)) + 2;
     for (let j = 0; j < 100; j++) {
       const x = Math.floor(Math.random() * upperBound);
       assert.equal(decodeTruncatedBinary(encodeTruncatedBinary(x, upperBound), upperBound), x);

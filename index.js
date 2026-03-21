@@ -1,9 +1,17 @@
-const encodeBinary = (x, length) => Array.from({ length }, () => (x & (1 << --length) ? 1 : 0));
-const encodeBigBinary = (x, length) => Array.from({ length: Number(length) }, () => (x & (1n << --length) ? 1 : 0));
+const encodeBinary = (x, length) => {
+  const a = [];
+  while (length--) a.push(x & (1 << length) ? 1 : 0)
+  return a
+}
+const encodeBigBinary = (x, length) => {
+  const a = [];
+  while (length--) a.push(x & (1n << length) ? 1 : 0)
+  return a
+}
 
 export const encodeTruncatedBinary = (x, upperBound) => {
   if (x < 0 || x >= upperBound) throw RangeError("encodeTruncatedBinary: x must be in range [0, upperBound).");
-  if (upperBound > 0xfffffff) {
+  if (upperBound > 0x3fffffff) {
     x = BigInt(x);
     upperBound = BigInt(upperBound);
     const b = BigInt(upperBound.toString(2).length);
@@ -23,7 +31,7 @@ export const decodeTruncatedBinary = (bitSequence, upperBound) => {
     if (it.done) throw RangeError("decodeTruncatedBinary: invalid code.");
     return it.value ? 1 : 0;
   };
-  if (upperBound > 0xfffffff) {
+  if (upperBound > 0x3fffffff) {
     upperBound = BigInt(upperBound);
     const b = BigInt(upperBound.toString(2).length);
     const u = (1n << b) - upperBound;
